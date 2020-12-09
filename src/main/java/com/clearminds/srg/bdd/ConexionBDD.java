@@ -40,7 +40,7 @@ public class ConexionBDD {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new BDDException();
+			throw new BDDException("No se pudo conectar a la base de datos");
 		}
 
 	}
