@@ -1,7 +1,11 @@
 package com.clearminds.srg.bdd;
 
 import java.io.FileReader;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.util.Properties;
+
+import com.clearminds.srg.excepciones.BDDException;
 
 public class ConexionBDD {
 
@@ -22,6 +26,23 @@ public class ConexionBDD {
 
 			return null;
 		}
+	}
+
+	public static Connection obtenerConexion() throws BDDException {
+		String user = leerPropiedad("user");
+		String password = leerPropiedad("password");
+		String urlConexion = leerPropiedad("urlConexion");
+
+		try {
+			Connection conexion = DriverManager.getConnection(urlConexion, user, password);
+
+			return conexion;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new BDDException();
+		}
+
 	}
 
 }
